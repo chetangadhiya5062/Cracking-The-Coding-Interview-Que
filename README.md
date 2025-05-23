@@ -1,9 +1,9 @@
 # 🚀 Cracking the Coding Interview - Solutions Repo
 
-![GitHub stars](https://img.shields.io/github/stars/yourusername/ctci-solutions?style=social)
-![GitHub forks](https://img.shields.io/github/forks/yourusername/ctci-solutions?style=social)
-![GitHub issues](https://img.shields.io/github/issues/yourusername/ctci-solutions)
-![License](https://img.shields.io/github/license/yourusername/ctci-solutions)
+![GitHub stars](https://img.shields.io/github/stars/chetangadhiya5062/ctci-solutions?style=social)
+![GitHub forks](https://img.shields.io/github/forks/chetangadhiya5062/ctci-solutions?style=social)
+![GitHub issues](https://img.shields.io/github/issues/chetangadhiya5062/ctci-solutions)
+![License](https://img.shields.io/github/license/chetangadhiya5062/ctci-solutions)
 
 ---
 
