@@ -1,20 +1,41 @@
-//Unique check through EXOR not optimized
 #include<iostream>
+#include<string>
 using namespace std;
 
-int is_Unique(int arr[], int n){
+// Function to check if all strings in the array are unique
+int is_Unique_cstring(string arr2[], int m){
+    for(int i = 0; i < m; i++){
+        int n = arr2[i].length();
+        for(int j = 0; j < n; j++){
+            for(int k = j + 1; k < n; k++){
+                if(arr2[i][j] == arr2[i][k]){
+                    return 0;  // Not unique characters in string arr2[i]
+                }
+            }
+        }
+    }
+    return 1; // All strings have unique characters
+}
+
+
+// XOR-based function to find the unique number (appears once)
+int is_Unique_numArray(int arr[], int n){
     int ans = 0;
     for(int i = 0 ; i < n ; i++){
         ans = ans ^ arr[i];
-        }
-    return ans;
     }
+    return ans;
+}
 
-int main(){
-    int arr[] = {1, 2,10,11,11,10,2,13,15,13,15};
-    int n = sizeof(arr)/sizeof(arr[0]);
+int main() {
+    string arr2[] = {"abcd", "sffsefr", "chetan", "bhavesh", "ghanu", "hil", "sahaj"};
+    int m = sizeof(arr2) / sizeof(arr2[0]);
 
-    int result = is_Unique(arr, n);
-    cout << "The unique element is: " << result << endl;
+    if (is_Unique_cstring(arr2, m))
+        cout << "All strings have unique characters." << endl;
+    else
+        cout << "Some strings have repeated characters." << endl;
+
     return 0;
 }
+
