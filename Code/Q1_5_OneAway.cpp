@@ -4,11 +4,33 @@ using namespace std;
 
 void stringAway(string str, string str2){
 
-    if (str.find(str2) != string::npos || str2.find(str) != string::npos) {
-        cout << "The strings are one away from each other." << endl;
-    } else {
-        cout << "The strings are not one away from each other." << endl;
+    int difference = 0;
+    int n = str.length();
+    int m = str2.length();
+
+    if (abs(n - m) > 1) {
+        cout << "Strings are not one away" << endl;
+        return;
     }
+    int i = 0, j = 0;
+    while (i < n && j < m) {
+        if (str[i] != str2[j]) {
+            difference++;
+            if (difference > 1) {
+                cout << "Strings are not one away" << endl;
+                return;
+            }
+            if (n > m) {
+                i++;
+            } else {
+                j++;
+            }
+        } else {
+            i++;
+            j++;
+        }
+    }
+    cout << "Strings are one away" << endl;
 }
 
 int main(){
