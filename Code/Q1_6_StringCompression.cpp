@@ -2,13 +2,29 @@
 #include<string>
 using namespace std;
 
-int stringCompression(string str, string &str2) {
+bool stringCompression(string str, string &str2) {
     int n = str.length();
+    int i = 0;
     if (n == 0) {
-        str2 = "";
-        return 0;
+        return false;
     }
-    return 0;
+    else {
+
+        int charCount[256] = {0}; // Assuming ASCII characters
+        for (char c : str) {
+            charCount[c]++;
+        }
+        while (i < n) {
+            char c = str[i];
+            str2 += c;
+            str2 += charCount[c];
+            charCount[c] = 0; // Reset count to avoid duplicates
+            i++;
+        }
+        if (str2.length() < n) { // Return true if compressed string is shorter
+            return true;
+        }
+    }
 }
 
 int main(){
@@ -16,12 +32,11 @@ int main(){
     string str2;
     cout << "Enter a string to compress: ";
     getline(cin, str); // string input leva
-    int compressedLength = stringCompression(str, str2);
     
-    if (compressedLength == 0) {
-        cout << str << endl;
+    if (stringCompression(str, str2)) {
+        cout << "new string : " << str2 << endl;
     } else {
-        cout << str2 << compressedLength << endl;
+        cout << "String would not be able to compress : " << str << endl;
     }
     return 0;
 }
