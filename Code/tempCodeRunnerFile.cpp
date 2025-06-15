@@ -11,16 +11,14 @@ string stringCompression(string str, string &str2) {
     else {
 
         int charCount[256] = {0}; // Assuming ASCII characters
-        
+        for (char c : str) {
+            charCount[c]++;
+        }
         while (i < n) {
             char c = str[i];
-            if (str[i] != str[i-1]){
-                
-            }
-            charCount[c]++;
             if (charCount[c] > 0){
                 str2 += c;
-                str2 += to_string(charCount[c]);// Read the note written at the end of this code. for understading the to_string function.
+                str2 += charCount[c];
                 charCount[c] = 0; // Reset count to avoid duplicates
                 i++;
                 
@@ -48,15 +46,3 @@ int main(){
     cout << "Compressed string: " << str2 << endl;
     return 0;
 }
-
-/*
-⚠️ What's going wrong here?
-
-You’re directly appending an integer count (e.g., 6) as a character, not as a number string. So C++ treats that integer as an ASCII code.
-
-For example:
-
-charCount[c] = 6
-
-str2 += charCount[c] → appends ASCII character 6 → non-printable/symbol like ♠
-*/
