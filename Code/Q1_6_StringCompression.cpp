@@ -5,6 +5,8 @@ using namespace std;
 string stringCompression(string str, string &str2) {
     int n = str.length();
     int i = 0;
+    char c = str[i];
+
     if (n == 0) {
         return str;
     }
@@ -13,20 +15,19 @@ string stringCompression(string str, string &str2) {
         int charCount[256] = {0}; // Assuming ASCII characters
         
         while (i < n) {
-            char c = str[i];
-            if (str[i] != str[i-1]){
+            if (str[i] == str[i-1]){
                 
-            }
-            charCount[c]++;
-            if (charCount[c] > 0){
-                str2 += c;
-                str2 += to_string(charCount[c]);// Read the note written at the end of this code. for understading the to_string function.
-                charCount[c] = 0; // Reset count to avoid duplicates
-                i++;
-                
-            } else {
-                i++;
-                continue; // Skip to next character if current is already counted
+                charCount[c]++;
+                if (charCount[c] > 0){
+                    str2 += c;
+                    str2 += to_string(charCount[c]);// Read the note written at the end of this code. for understading the to_string function.
+                    charCount[c] = 0; // Reset count to avoid duplicates
+                    i++;
+                    
+                } else {
+                    i++;
+                    continue; // Skip to next character if current is already counted
+                }
             }
         }
         if (str2.length() < n) { // Return true if compressed string is shorter
