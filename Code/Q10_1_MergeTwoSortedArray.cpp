@@ -7,9 +7,12 @@ end to hold B. Write a method to merge B into A in sorted order.
 using namespace std;
 
 int main(){
-    vector<int> A = {1, 3, 5, 7, 0, 0, 0}; // Buffer at the end
+    vector<int> A = {1, 3, 5, 7}; 
     vector<int> B = {2, 4, 6};
-    int j = 0;
+    vector<int> C;
+    
+
+    int i = 0, j = 0;
     // while (i < A.size()){
 
     //     if(A[i] == 0){
@@ -17,15 +20,22 @@ int main(){
     //         i++;
     //     }
     // } //don't know why but it runs for infinite.
-    for (int i = 0 ; i < A.size() ; i++){
-        if(A[i] == 0){
-            A[i] = B[j];
+    while (i < A.size() || j < B.size()){
+        if (A[i] <= B[j]){
+            C.push_back(A[i]);
+            i++;
+        }
+        else if (A[i] > B[j]){
+            C.push_back(B[j]);
             j++;
         }
     }
-    cout << "Array A after merging: ";
-    for (int num : A) {
+    
+    cout << "Merged Sorted Vector: ";
+    for (auto num : C){
         cout << num << " ";
     }
+    cout << endl;
+
     return 0;
 }
