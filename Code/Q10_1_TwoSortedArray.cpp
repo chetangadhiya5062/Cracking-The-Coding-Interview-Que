@@ -9,7 +9,7 @@ using namespace std;
 int main(){
     vector<int> A = {1, 3, 5, 7, 0, 0, 0}; // Buffer at the end
     vector<int> B = {2, 4, 6};
-    int i = 0;
+    int j = 0;
     // while (i < A.size()){
 
     //     if(A[i] == 0){
@@ -19,8 +19,8 @@ int main(){
     // } //don't know why but it runs for infinite.
     for (int i = 0 ; i < A.size() ; i++){
         if(A[i] == 0){
-            A[i] = B[i];
-            i++;
+            A[i] = B[j];
+            j++;
         }
     }
     cout << "Array A after merging: ";
