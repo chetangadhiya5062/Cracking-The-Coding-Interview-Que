@@ -2,54 +2,54 @@
 #include<string>
 using namespace std;
 
-string stringCompression(string str, string &str2) {
+string stringCompression(const string &str) {
     int n = str.length();
-    int i = 0;
-    char c = str[i];
-
+    
+    //if empty string
     if (n == 0) {
         return str;
     }
-    else {
+    int i = 0;
+    string str2 = "";
+            //each character count.
+    // int charCount[256] = {0}; // Assuming ASCII characters
+    //traverse in string
+    while (i < n) {
+        char c = str[i];
+        int charCount = 0;
 
-        int charCount[256] = {0}; // Assuming ASCII characters
+        //count the occurrences of each char.
+        while(i < n && str[i] == c){
+            charCount ++;
+            i++;
+        }
+
+        str2 += c;
+        str2 += to_string(charCount);            
         
-        while (i < n) {
-            if (str[i] == str[i-1]){
-                
-                charCount[c]++;
-                if (charCount[c] > 0){
-                    str2 += c;
-                    str2 += to_string(charCount[c]);// Read the note written at the end of this code. for understading the to_string function.
-                    charCount[c] = 0; // Reset count to avoid duplicates
-                    i++;
-                    
-                } else {
-                    i++;
-                    continue; // Skip to next character if current is already counted
-                }
-            }
-        }
-        if (str2.length() < n) { // Return true if compressed string is shorter
-            return str2;
-        }
-        else {
-            // If not compressed, return original string
-            return str;
-        }
     }
+        // Return if compressed string is shorter
+    if (str2.length() < n) { 
+        return str2;
+    }
+    else {
+        // If not compressed, return original string
+        return str;
+    }
+    
 }
 
-int main(){
-    string str;
-    string str2;
-    cout << "Enter a string to compress: ";
-    getline(cin, str); // string input leva
-    str2 = stringCompression(str, str2);
-    cout << "Compressed string: " << str2 << endl;
+int main() {
+    string str  ;
+    cout << "Enter a string: ";
+    cin >> str;
+
+    string compressed = stringCompression(str);
+
+    cout << "Compressed string: " << compressed << endl;
+
     return 0;
 }
-
 /*
 ⚠️ What's going wrong here?
 
