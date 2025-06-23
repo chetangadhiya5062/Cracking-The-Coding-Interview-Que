@@ -6,74 +6,66 @@ EXAMPLE
 lnput:findSin{15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14}
 Output: 8 (the index of 5 in the array)
 */
-
 #include <iostream>
-#include <vector>
-#include <algorithm>// for swap
+#include <algorithm> // for min_element, max_element
 using namespace std;
 
-void printArray(int arr[][5], int row, int col){
-    for (int i = 0 ; i < row ; i++){
-        for (int j = 0; j < col ; j++){
-            cout << arr[i][j] << " ";
-        }
-        cout << endl;
+void printArray(int arr[], int size) {
+    for (int i = 0 ; i < size ; i++) {
+        cout << arr[i] << " ";
     }
+    cout << endl;
 }
 
-void transpose(int arr[][5], int row, int col){
-    for (int i = 0 ; i < row ; i++){
-        for (int j = i+1 ; j < col ; j++){
-            swap(arr[i][j], arr[j],arr[i]);
-        }
+// Linear search from start1 to end1 (inclusive)
+int search(int arr[], int start1, int end1, int n) {
+    for (int i = start1 ; i <= end1 ; i++) {
+        if (arr[i] == n) return i;
     }
+    return -1;
 }
 
-void reverseArr(int arr[][5], int row, int col){
-    for (int i = 0 ; i < row ; i ++){
-        int start = 0;
-        int end = col-1;
+int searchRotatedArray(int arr[], int size, int n) {
+    int start = 0;
+    int end = size - 1;
 
-        while (start < end){
-            swap(arr[i][start], arr[end][i]);
-            start ++;
-            end --;
-        }
+    // Find index of min and max using std::min_element and std::max_element
+    int min_index = min_element(arr, arr + size) - arr;
+    int max_index = max_element(arr, arr + size) - arr;
+
+    // Search in appropriate half
+    int result = -1;
+
+    if (n == arr[min_index]) return min_index;
+    if (n == arr[max_index]) return max_index;
+
+    if (n >= arr[start] && n <= arr[max_index]) {
+        result = search(arr, start, max_index, n);
+    } else if (n >= arr[min_index] && n <= arr[end]) {
+        result = search(arr, min_index, end, n);
     }
+
+    return result;
 }
-void rotatedArray(int arr[][5], int row, int col, int m){
-    //first get transpose matrix and then reverse each row..= rotated matrix
-}
-int main(){
-    int arr[5][5] = {
-        {12,243,44,556,443},
-        {1236,6,34,32,357,},
-        {53,214,535,655,42},
-        {22,345,677,654,33},
-        {4,2123,456,898,63}
-    };
 
-    int row = 5;
-    int col = 5;
+int main() {
+    int arr[] = {15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14};
+    int size = sizeof(arr) / sizeof(arr[0]);
 
-    cout << "Original Array : " << endl;
-    printArray(arr, row, col);
+    cout << "Original Array: ";
+    printArray(arr, size);
 
-    int m;
     int n;
-
-    cout << "Enter rotation number : " << endl;
-    cin >> m;
-
-    cout << "Here is the " << m << " time Rotated array : " << endl;
-    rotatedArray(arr, row, col, m);
-    //display rotated array.
-    printArray(arr, row, col);
-
-    cout << "Enter the number for search : " << endl;
+    cout << "Enter the number to search: ";
     cin >> n;
 
-    searchRotatedArray(arr, row, col, m, n);
+    int index = searchRotatedArray(arr, size, n);
+
+    if (index != -1) {
+        cout << "Element found at index: " << index << endl;
+    } else {
+        cout << "Element not found in the array." << endl;
+    }
 
     return 0;
 }
